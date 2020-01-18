@@ -4,6 +4,6 @@ services:
     build: .
     image: my-jupyter-notebook    
     volumes:
-      - ./notebooks:/home/jovyan/notebooks 
+      - ./notebooks:/home/jovyan/work 
     ports:
       - "8888:8888"
