@@ -1,8 +1,8 @@
 FROM jupyter/base-notebook
 
-USER hung
+USER jovyan
 
-# Install Tensorflow
+# Install Pandas, pandas-gbq
 RUN conda install --quiet --yes \    
     'pandas' \
     'pandas-gbq' --channel conda-forge
