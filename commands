@@ -1,0 +1,4 @@
+EDA:
+	docker-compose up -d			create container
+	docker logs eda_jupyter-notebook_1	check logs of container, to find access token
+
