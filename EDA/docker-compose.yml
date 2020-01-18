@@ -4,6 +4,6 @@ services:
     build: .
     image: my-jupyter-notebook    
     volumes:
-      - ./gexample:/home/hung/work 
+      - ./notebooks:/home/jovyan/notebooks 
     ports:
-      - "8889:8888"
+      - "8888:8888"
