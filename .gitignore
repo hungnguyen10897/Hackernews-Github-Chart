@@ -1,1 +1,4 @@
-airflow-hackernews-github-365ae261a883.json
+/EDA/notebooks/.ipynb_checkpoints/*
+**/airflow-hackernews-github-365ae261a883.json
+.ipynb_checkpoints/
+.ipynb_checkpoints
