@@ -2,3 +2,6 @@ EDA:
 	docker-compose up -d			create container
 	docker logs eda_jupyter-notebook_1	check logs of container, to find access token
 
+etl:						contains the docker compose file for airflow
+	docker-compose up -d			create 2 containers
+	
