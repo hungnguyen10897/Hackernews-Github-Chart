@@ -28,8 +28,8 @@ schedule_interval = "00 21 * * *"
 
 dag = DAG('bigquery_github_trends', default_args = default_args, schedule_interval = schedule_interval)
 
-#Task 1: Check for table_id in githubarchive.day dataset
-# To test:
+#Task 1: Check if githubarchive contains data for the date
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends github_table_check 2020-01-01
 t1 = BigQueryCheckOperator(
     task_id = "github_table_check",
     sql = """
@@ -40,4 +40,20 @@ t1 = BigQueryCheckOperator(
     bigquery_conn_id = BQ_CONN,
     use_legacy_sql = False,
     dag = dag
+)
+
+#Task 2: Check if hackernews 
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends hackernews_table_check 2020-01-01
+t2 = BigQueryCheckOperator(
+    task_id = "hackernews_table_check",
+    sql = """
+        SELECT timestamp FROM
+        `bigquery-public-data.hacker_news.full`
+        WHERE EXTRACT(date from timestamp) = '{{ yesterday_ds }}'
+            AND type = 'story'
+        LIMIT 1
+    """,
+    bigquery_conn_id=BQ_CONN,
+    use_legacy_sql=False,
+    dag=dag
 )
