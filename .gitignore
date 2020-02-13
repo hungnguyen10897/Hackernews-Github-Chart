@@ -2,3 +2,4 @@
 **/airflow-hackernews-github-365ae261a883.json
 .ipynb_checkpoints/
 .ipynb_checkpoints
+**/__pycache__/**
