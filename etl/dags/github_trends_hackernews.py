@@ -129,3 +129,37 @@ t4 = BigQueryOperator(
     dag=dag
 )
 
+# Task 5: Aggregate Hackernews data
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends aggregate_hackernews 2020-01-01
+t5 = BigQueryOperator(
+    task_id='aggregate_hackernews',
+    use_legacy_sql=False,
+    write_disposition='WRITE_TRUNCATE',
+    allow_large_results=True,
+    sql='''
+    #standardSQL
+    SELECT
+      FORMAT_TIMESTAMP("%Y%m%d", timestamp) AS date,
+      `by` AS submitter,
+      id as story_id,
+      REGEXP_EXTRACT(url, "(https?://github.com/[^/]*/[^/#?]*)") as url,
+      SUM(score) as score
+    FROM
+      `bigquery-public-data.hacker_news.full`
+    WHERE
+      type = 'story'
+      AND timestamp>'{{ yesterday_ds }}'
+      AND timestamp<'{{ ds }}'
+      AND url LIKE '%https://github.com%'
+      AND url NOT LIKE '%github.com/blog/%'
+    GROUP BY
+      date,
+      submitter,
+      story_id,
+      url
+    ''',
+    destination_dataset_table=f'{GCP_PROJECT}.{PROJECT_DATASET}.hackernews_agg${r"{{ yesterday_ds_nodash }}"}',
+    bigquery_conn_id= BQ_CONN,
+    dag=dag
+)
+
