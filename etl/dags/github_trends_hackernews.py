@@ -228,3 +228,9 @@ t7 = BigQueryCheckOperator(
     bigquery_conn_id= BQ_CONN,
     dag=dag)
 
+t1.set_downstream(t3)
+t3.set_downstream(t4)
+t2.set_downstream(t5)
+t4.set_downstream(t6)
+t5.set_downstream(t6)
+t6.set_downstream(t7)
