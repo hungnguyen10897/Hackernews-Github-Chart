@@ -24,6 +24,7 @@ services:
       - LOAD_EX=n
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_key/airflow-hackernews-github-365ae261a883.json
     volumes:
       - ./dags:/usr/local/airflow/dags
       - ./key:/tmp/gcp_key
