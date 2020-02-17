@@ -40,4 +40,12 @@ Replace your project_id and your keyfile name in the Keyfile Path section. For e
 
 The *dags* folder contains the dag file for Airflow. Commands to test the tasks are provided for each task, simply replace the desired *execution_date* at the end of the CLI commands.
 
-Changing the start_date i
+The dag is scheduled to run once a day. Changing the *start_date* entry for the *default_args* and initiating a dag run from Airflow Web UI will automatically perform a **catchup**, running all the tasks from the start_date (probably in the past) to present, for each day.
+
+![default arguments](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/task_arguments.png)
+
+## Visualization with Google Data Studio
+
+The output data can be visualized easily with Google Data Studio.
+
+![Visualizing the data]()
