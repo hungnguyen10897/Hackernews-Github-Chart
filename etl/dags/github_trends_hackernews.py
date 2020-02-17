@@ -10,8 +10,8 @@ from datetime import datetime, timedelta
 default_args = {
     'owner': 'airflow',
     'depends_on_past': True,
-    'start_date': datetime(2020, 1, 1),
-    'end_date' : datetime(2020, 1, 5),
+    'start_date': datetime(2020, 2, 5),
+    #'end_date' : datetime(2020, 1, 5),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -27,9 +27,9 @@ BQ_CONN = "gcp_conn"
 GCP_PROJECT = "airflow-hackernews-github"
 PROJECT_DATASET = "github_trends"
 
-schedule_interval = "00 21 * * *"
+schedule_interval = "0 0 * * *"
 
-dag = DAG('bigquery_github_trends', default_args = default_args, schedule_interval = schedule_interval)
+dag = DAG('bigquery_github_trends', catchup=True ,default_args = default_args, schedule_interval = schedule_interval)
 
 #Task 1: Check if githubarchive contains data for the date.
 # To test: docker-compose run --rm webserver airflow test bigquery_github_trends github_table_check 2020-01-01
@@ -153,7 +153,7 @@ t5 = BigQueryOperator(
       AND url LIKE '%https://github.com%'
       AND url NOT LIKE '%github.com/blog/%'
     GROUP BY
-      date,
+      date, 
       submitter,
       story_id,
       url
@@ -171,7 +171,7 @@ t6 = BigQueryOperator(
     use_legacy_sql=False,
     write_disposition='WRITE_TRUNCATE',
     allow_large_results=True,
-    bql=f'''
+    sql=f'''
     #standardSQL
     SELECT
       a.date as date,
