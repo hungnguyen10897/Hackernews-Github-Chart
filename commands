@@ -6,4 +6,5 @@ etl:						contains the docker compose file for airflow
 	docker-compose up -d			create 2 containers
 	docker-compose run --rm webserver airflow test [DAG_ID] [TASK_ID] [EXECUTION_DATE]
 						use airflow to test a task of a dag 
-			
+	docker-compose run --rm webserver airflow backfill -t github_daily_metrics_write -s 2020-02-01 -e 2020-02-17 -I bigquery_github_trends
+						backfill data			
