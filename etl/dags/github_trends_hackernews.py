@@ -62,9 +62,9 @@ t2 = BigQueryCheckOperator(
 )
 
 #Task 3: Create/Load github_daily_metrics table
-# To test: docker-compose run --rm webserver airflow test bigquery_github_trends write_to_github_daily_metrics 2020-01-01
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends github_daily_metrics_write 2020-01-01
 t3 = BigQueryOperator(
-    task_id='write_to_github_daily_metrics',
+    task_id='github_daily_metrics_write',
     use_legacy_sql=False,
     write_disposition='WRITE_TRUNCATE',
     allow_large_results=True,
@@ -95,9 +95,9 @@ t3 = BigQueryOperator(
 )
 
 # Task 4: Aggregate Github metrics into the last 1, 7, 28 days.
-# To test: docker-compose run --rm webserver airflow test bigquery_github_trends aggregate_github_metrics 2020-01-01
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends github_metrics_aggregate 2020-01-01
 t4 = BigQueryOperator(
-    task_id='aggregate_github_metrics',
+    task_id='github_metrics_aggregate',
     use_legacy_sql=False,
     write_disposition='WRITE_TRUNCATE',
     allow_large_results=True,
@@ -130,9 +130,9 @@ t4 = BigQueryOperator(
 )
 
 # Task 5: Aggregate Hackernews data
-# To test: docker-compose run --rm webserver airflow test bigquery_github_trends aggregate_hackernews 2020-01-01
+# To test: docker-compose run --rm webserver airflow test bigquery_github_trends hackernews_aggregate 2020-01-01
 t5 = BigQueryOperator(
-    task_id='aggregate_hackernews',
+    task_id='hackernews_aggregate',
     use_legacy_sql=False,
     write_disposition='WRITE_TRUNCATE',
     allow_large_results=True,
