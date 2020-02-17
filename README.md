@@ -30,5 +30,14 @@ Copy and paste the whole url toghether with the token part to the browser.
 
 All things related to Airflow are within folder *etl*
 
-First off, acquire an access key (a json file) from GCP to access BigQuery. Place this key into *key* folder inside *etl* folder. For example, the path to the key file is: "*./etl/key/my_access_key.json*".
+First off, acquire an service key (a json file) from GCP to access BigQuery, [more detail](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console). Place this key into *key* folder inside *etl* folder. For example, the path to the key file is: "*./etl/key/my_access_key.json*".
 
+Next is to configure connection on airflow. This is done directly through the web UI of airflow, accessible at localhost:8080. Set up the key according to the following:
+
+![GCP BigQuery Connection Set up](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/AirflowConnection.png)
+
+Replace your project_id and your keyfile name in the Keyfile Path section. For example, your keyfile name is *my_gcp_key.json* then in the Keyfile Path section: */tmp/gcp_key/my_gcp_key.json*
+
+The *dags* folder contains the dag file for Airflow. Commands to test the tasks are provided for each task, simply replace the desired *execution_date* at the end of the CLI commands.
+
+Changing the start_date i
