@@ -4,13 +4,14 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.contrib.operators.bigquery_check_operator import BigQueryCheckOperator
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
 
+from airflow.models import Variable
 
 from datetime import datetime, timedelta
 
 default_args = {
     'owner': 'airflow',
     'depends_on_past': True,
-    'start_date': datetime(2020, 2, 5),
+    'start_date': datetime(2020, 2, 18),
     #'end_date' : datetime(2020, 1, 5),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
@@ -23,9 +24,11 @@ default_args = {
     # 'end_date': datetime(2016, 1, 1),
 }
 
-BQ_CONN = "gcp_conn"
-GCP_PROJECT = "airflow-hackernews-github"
-PROJECT_DATASET = "github_trends"
+gcp_config = Variable.get("gcp_bq_config", deserialize_json=True)
+
+BQ_CONN = gcp_config["BQ_CONN"]
+GCP_PROJECT = gcp_config["GCP_PROJECT"]
+PROJECT_DATASET = gcp_config["PROJECT_DATASET"]
 
 schedule_interval = "0 0 * * *"
 
