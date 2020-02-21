@@ -1,0 +1,7 @@
+{
+    "gcp_bq_config" : {
+        "BQ_CONN" : "gcp_conn",
+        "GCP_PROJECT" : "airflow-hackernews-github",
+        "PROJECT_DATASET" : "github_trends"
+    }
+}
