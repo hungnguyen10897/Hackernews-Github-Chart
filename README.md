@@ -34,7 +34,11 @@ First off, acquire an service key (a json file) from GCP to access BigQuery, [mo
 
 Next is to configure connection on airflow. This is done directly through the web UI of airflow, accessible at localhost:8080. Set up the key according to the following:
 
-![GCP BigQuery Connection Set up](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/AirflowConnection.png)
+<br/>
+
+![GCP](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/AirflowConnection.png)
+
+<br/>
 
 Replace your project_id and your keyfile name in the Keyfile Path section. For example, your keyfile name is *my_gcp_key.json* then in the Keyfile Path section: */tmp/gcp_key/my_gcp_key.json*
 
@@ -42,10 +46,20 @@ The *dags* folder contains the dag file for Airflow. Commands to test the tasks 
 
 The dag is scheduled to run once a day. Changing the *start_date* entry for the *default_args* and initiating a dag run from Airflow Web UI will automatically perform a **catchup**, running all the tasks from the start_date (probably in the past) to present, for each day.
 
+<br/>
+
 ![default arguments](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/task_arguments.png)
+
+<br/>
 
 ## Visualization with Google Data Studio
 
+<br/>
+
 The output data can be visualized easily with Google Data Studio.
 
-![Visualizing the data]()
+<br/>
+
+![Visualizing the data](https://github.com/hungnguyen10897/Hackernews-Github-Chart/blob/master/Images/report_dashboard.png)
+
+<br/>
