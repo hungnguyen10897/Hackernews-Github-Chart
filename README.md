@@ -28,7 +28,7 @@ Copy and paste the whole url toghether with the token part to the browser.
 
 <br/>
 
-All things related to Airflow are within folder *etl*
+All things related to Airflow are within folder *etl*. Within *etl* create a directory *pg_data* as a volume for postgres container.
 
 First off, acquire an service key (a json file) from GCP to access BigQuery, [more detail](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console). Place this key into *key* folder inside *etl* folder. For example, the path to the key file is: "*./etl/key/my_access_key.json*".
 
